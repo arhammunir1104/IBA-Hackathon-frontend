@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,18 +31,22 @@ const Navbar = () => {
 
         {/* Login / Sign Up Buttons */}
         <div className="hidden md:flex space-x-4">
-          <motion.button
-            className="px-4 py-2 border border-green-600 text-green-600 rounded-md hover:bg-green-600 hover:text-white transition"
-            whileTap={{ scale: 0.9 }}
-          >
-            Login
-          </motion.button>
+          <Link to="/login">
+            <motion.button
+              className="px-4 py-2 border border-green-600 text-green-600 rounded-md hover:bg-green-600 hover:text-white transition"
+              whileTap={{ scale: 0.9 }}
+            >
+              Login
+            </motion.button>
+          </Link>
+          <Link to="/signup">
           <motion.button
             className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
             whileTap={{ scale: 0.9 }}
-          >
+            >
             Sign Up
           </motion.button>
+            </Link>
         </div>
 
         {/* Mobile Menu Button */}
