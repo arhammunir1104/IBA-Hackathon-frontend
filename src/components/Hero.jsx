@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 
 export default function HeroSection() {
- 
   const categories = ["Images", "Videos", "PDF Files"];
 
   return (
@@ -18,7 +17,8 @@ export default function HeroSection() {
           SkillSwap. Learn & Grow Together.
         </motion.h1>
         <p className="mt-4 text-lg text-gray-600">
-          Connect with talented people, exchange skills, and build something amazing. No money, just knowledge.
+          Connect with talented people, exchange skills, and build something
+          amazing. No money, just knowledge.
         </p>
 
         {/* Improved Search Bar */}
@@ -33,13 +33,21 @@ export default function HeroSection() {
             placeholder="Search by creator name, tags..."
             className="flex-grow p-3 rounded-l-full text-gray-700 outline-none text-lg"
           />
-          <select className="p-3 bg-green-600 text-white rounded-r-full text-lg cursor-pointer">
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          <div className="relative inline-block">
+            <select
+              className="p-2 pr-8 bg-green-200 text-green-700 border-2 border-green-900 rounded-r-full text-lg cursor-pointer opacity-75 appearance-none 
+           hover:bg-green-600 hover:text-white focus:opacity-100 transition duration-300"
+            >
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-700 pointer-events-none">
+              <FaChevronDown size={14} />
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>

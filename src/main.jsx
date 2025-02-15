@@ -10,6 +10,7 @@ import Queries from './Pages/Queries.jsx';
 import UserDashboard from './Pages/UserDashBoard.jsx';
 import FileDetails from './Pages/FileDetails.jsx';
 import EditProfile from './Pages/EditProfile.jsx';
+import UploadPage from './Pages/UploadPAge.jsx';
 
 const router = createBrowserRouter([{
   path: "/",
@@ -43,6 +44,9 @@ const router = createBrowserRouter([{
   {
     path: "edit",
     element: <EditProfile />
+  },{
+    path: "uploadpage",
+    element: <UploadPage />
   },
 ]
 }])
