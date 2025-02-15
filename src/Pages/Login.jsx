@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'; // Google Icon
+import Navbar2 from '@/components/Navbar2';
 
 export default function Login() {
     return (
+        <>
+        <Navbar2 />
+       
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-[400px] h-[480px] flex flex-col justify-center">
                 <h2 className="text-2xl font-semibold text-center mb-6 text-green-700">Login</h2>
@@ -40,5 +44,6 @@ export default function Login() {
                 </p>
             </div>
         </div>
+        </>
     );
 }
