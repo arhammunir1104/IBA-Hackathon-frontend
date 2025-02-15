@@ -72,12 +72,16 @@ const Navbar = () => {
             </a>
           ))}
           <div className="mt-4 space-y-2">
-            <button className="w-full px-4 py-2 border border-green-600 text-green-600 rounded-md hover:bg-green-600 hover:text-white transition">
+          <Link to="/login">
+            <button className="w-full px-4 py-2 border border-green-600 text-green-600 rounded-md hover:bg-green-600 hover:text-white transition my-2">
               Login
             </button>
-            <button className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
+          </Link>
+          <Link to="/signup">
+            <button className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition my-2">
               Sign Up
             </button>
+            </Link> 
           </div>
         </motion.div>
       )}
