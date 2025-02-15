@@ -1,10 +1,12 @@
 import React from "react";
-import FileDropzone from "./components/FileDropZone";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
 
 function App() {
     return (
         <div className="flex justify-center items-center h-screen bg-gray-200">
-            <FileDropzone />
+            <Header />
+            <Outlet />
         </div>
     );
 }
