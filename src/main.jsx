@@ -7,6 +7,7 @@ import HomePage from './Pages/HomePage.jsx';
 import Login from './Pages/Login.jsx';
 import Signup from './Pages/Signup.jsx';
 import Queries from './Pages/Queries.jsx';
+import UserDashboard from './Pages/UserDashBoard.jsx';
 
 const router = createBrowserRouter([{
   path: "/",
@@ -24,12 +25,15 @@ const router = createBrowserRouter([{
     {
     path: "signup",
     element: <Signup />
-  }
-  ,
-  {
-    path:'queries',
-    element : <Queries />
-  }
+  },
+    {
+    path: "queries",
+    element: <Queries />
+  },
+    {
+    path: "dashboard",
+    element: <UserDashboard />
+  },
 ]
 }])
 
