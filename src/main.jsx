@@ -8,6 +8,7 @@ import Login from './Pages/Login.jsx';
 import Signup from './Pages/Signup.jsx';
 import Queries from './Pages/Queries.jsx';
 import UserDashboard from './Pages/UserDashBoard.jsx';
+import FileDetails from './Pages/FileDetails.jsx';
 
 const router = createBrowserRouter([{
   path: "/",
@@ -33,6 +34,10 @@ const router = createBrowserRouter([{
     {
     path: "dashboard",
     element: <UserDashboard />
+  },
+  {
+    path: "filedetails",
+    element: <FileDetails />
   },
 ]
 }])
