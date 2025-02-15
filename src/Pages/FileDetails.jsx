@@ -1,3 +1,4 @@
+import Navbar2 from "@/components/Navbar2";
 import ProductShowcase from "@/components/ProductShowcase";
 
 export default function FileDetails(){
@@ -15,7 +16,10 @@ export default function FileDetails(){
         },
     };
     return(
+      <>
+      <Navbar2 />
       <ProductShowcase file={data} />
+      </>
     )
     
 

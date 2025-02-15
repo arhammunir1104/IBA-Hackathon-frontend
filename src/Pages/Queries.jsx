@@ -1,7 +1,10 @@
+import Navbar2 from "@/components/Navbar2";
 import PostForQuery from "../components/PostForQuery";
 
 export default function Queries() {
   return (
+    <>
+      <Navbar2 />
     <div>
     <div className="flex w-full h-[calc(100vh-80px)] bg-white border-r border-gray-300 p-8">
         <h2 className="text-sm font-semibold text-green-500">Search Anything</h2>
@@ -17,5 +20,6 @@ export default function Queries() {
         <PostForQuery />
       </div>
     </div>
+    </>
   );
 }

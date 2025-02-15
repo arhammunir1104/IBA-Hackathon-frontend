@@ -1,9 +1,13 @@
 import React from 'react';
 import PostForQuery from '../components/PostForQuery'; 
 import user from "../assets/user.webp"
+import Navbar2 from '@/components/Navbar2';
+import { Link } from 'react-router-dom';
 
 export default function UserDashboard() {
   return (
+    <>
+      <Navbar2 />
     <div className="flex flex-col md:flex-row px-4">
       {/* Profile Section */}
       <div className="md:w-[25vw] p-4 flex flex-col items-center md:border-r-2 border-gray-300 md:h-screen py-[60px] border-b-2">
@@ -21,7 +25,9 @@ export default function UserDashboard() {
         <div className="mt-4 flex flex-col items-center gap-2">
           <a href="https://linkedin.com/in/abdulmoazzim" target="_blank" rel="noopener noreferrer" className="text-blue-500">LinkedIn</a>
           <a href="mailto:abdulmoazzim0815@gmail.com" className="text-gray-500">abdulmoazzim0815@gmail.com</a>
-          <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Edit Profile</button>
+          <Link to="/edit">
+            <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Edit Profile</button>
+          </Link>
         </div>
       </div>
       
@@ -33,5 +39,6 @@ export default function UserDashboard() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function CallToAction() {
   return (
@@ -64,7 +65,8 @@ export default function CallToAction() {
         viewport={{ once: true }}
         whileHover={{ scale: 1.1 }}
       >
-        Sign Up for Free
+        <Link to="/signup">
+        Sign Up for Free</Link>
       </motion.button>
     </section>
   );

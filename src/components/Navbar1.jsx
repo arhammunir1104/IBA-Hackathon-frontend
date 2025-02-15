@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar1 = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <nav className="bg-white shadow-md  w-full relative">
@@ -17,7 +17,10 @@ const Navbar = () => {
           SkillSwap
         </motion.div>
         <div className="hidden md:flex space-x-8">
-          {["Home", "Features", "How It Works", "Contact"].map((item, index) => (
+          <Link className="text-gray-700 hover:text-green-600 transition" to="/">
+              Home
+          </Link>
+          {["Features", "How It Works", "Contact"].map((item, index) => (
             <motion.a
               key={index}
               href={`#${item.toLowerCase().replace(" ", "-")}`}
@@ -61,7 +64,10 @@ const Navbar = () => {
           transition={{ duration: 0.3 }}
           className="md:hidden bg-white shadow-md p-4 absolute top-full left-0 w-full"
         >
-          {["Home", "Features", "How It Works", "Contact"].map((item, index) => (
+          <Link className="text-gray-700 hover:text-green-600 transition" to="/">
+              Home
+          </Link>
+          {["Features", "How It Works", "Contact"].map((item, index) => (
             <a
               key={index}
               href={`#${item.toLowerCase().replace(" ", "-")}`}
@@ -89,4 +95,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar1;

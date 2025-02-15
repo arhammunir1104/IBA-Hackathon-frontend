@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import google from "../assets/google.svg"
+import Navbar2 from '@/components/Navbar2';
 
 export default function Signup() {
     return (
+      <>
+      <Navbar2 />
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
       <form className="bg-white p-6 rounded-lg shadow-lg">
@@ -20,5 +23,6 @@ export default function Signup() {
       </form>
       <p className="mt-2">Already have an account? <Link to="/login" className="text-green-500">Login</Link></p>
     </div>
+    </>
       );
 }
