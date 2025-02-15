@@ -1,4 +1,4 @@
-import PostForQuery from "@/components/PostForQuery";
+import PostForQuery from "../components/PostForQuery";
 
 export default function Queries() {
   return (

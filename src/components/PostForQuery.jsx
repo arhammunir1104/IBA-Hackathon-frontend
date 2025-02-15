@@ -1,5 +1,6 @@
 import React from 'react'
 import { Heart } from "lucide-react";
+import { Link } from 'react-router-dom';
 export default function PostForQuery() {
   return (
     <Link className="bg-white p-4 shadow-md rounded-lg flex space-x-4 border border-gray-300 cursor-pointer" to="">;

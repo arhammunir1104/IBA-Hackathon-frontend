@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+    <nav className="bg-white shadow-md  w-full relative">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
