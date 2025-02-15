@@ -1,24 +1,49 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
-import google from "../assets/google.svg"
+import { FcGoogle } from 'react-icons/fc'; // Google Icon
 
 export default function Signup() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
-      <form className="bg-white p-6 rounded-lg shadow-lg">
-        <input type="text" placeholder="Name" className="border p-2 rounded w-full mb-2" />
-        <input type="email" placeholder="Email" className="border p-2 rounded w-full mb-2" />
-        <input type="password" placeholder="Password" className="border p-2 rounded w-full mb-2" />
-        <button className="bg-green-500 text-white px-4 py-2 rounded w-full">Sign Up</button>
-        <div className='flex w-full items-center justify-center'>
-            <div className='flex justify-around items-center w-1/2 mt-6 py-2 border-red-500 border-2 rounded-md'>
-                <button className=" px-6">Sign Up with Google</button>
-                <img src={google} className='w-[40px]'/>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-[420px] h-[520px] flex flex-col justify-center">
+                <h2 className="text-2xl font-semibold text-center mb-6 text-green-700">Sign Up</h2>
+                
+                <form className="flex flex-col">
+                    <input 
+                        type="text" 
+                        placeholder="Full Name" 
+                        className="border border-gray-300 p-3 rounded w-full mb-3 focus:outline-none focus:ring-2 focus:ring-green-400" 
+                    />
+                    <input 
+                        type="email" 
+                        placeholder="Email" 
+                        className="border border-gray-300 p-3 rounded w-full mb-3 focus:outline-none focus:ring-2 focus:ring-green-400" 
+                    />
+                    <input 
+                        type="password" 
+                        placeholder="Password" 
+                        className="border border-gray-300 p-3 rounded w-full mb-4 focus:outline-none focus:ring-2 focus:ring-green-400" 
+                    />
+                    
+                    <button className="bg-green-500 text-white px-4 py-3 rounded-full w-full text-lg font-semibold hover:bg-green-600 transition">
+                        Sign Up
+                    </button>
+                    
+                    <div className="relative text-center mt-4">
+                        <span className="absolute inset-x-0 top-1/2 transform -translate-y-1/2 border-t border-gray-300"></span>
+                        <span className="bg-white px-3 text-gray-500 relative">OR</span>
+                    </div>
+                    
+                    {/* Google Signup Button */}
+                    <button className="flex items-center justify-center gap-3 border border-green-500 text-green-700 px-4 py-3 rounded-full w-full mt-4 font-semibold hover:bg-green-500 hover:text-white transition">
+                        <FcGoogle size={22} /> Sign Up with Google
+                    </button>
+                </form>
+
+                <p className="mt-4 text-center text-gray-600">
+                    Already have an account? <Link to="/login" className="text-green-600 font-semibold">Login</Link>
+                </p>
             </div>
         </div>
-      </form>
-      <p className="mt-2">Already have an account? <Link to="/login" className="text-green-500">Login</Link></p>
-    </div>
-      );
+    );
 }
