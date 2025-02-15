@@ -6,6 +6,7 @@ import "./index.css";
 import HomePage from './Pages/HomePage.jsx';
 import Login from './Pages/Login.jsx';
 import Signup from './Pages/Signup.jsx';
+import Queries from './Pages/Queries.jsx';
 
 const router = createBrowserRouter([{
   path: "/",
@@ -23,7 +24,13 @@ const router = createBrowserRouter([{
     {
     path: "signup",
     element: <Signup />
-  }]
+  }
+  ,
+  {
+    path:'queries',
+    element : <Queries />
+  }
+]
 }])
 
 createRoot(document.getElementById('root')).render(
