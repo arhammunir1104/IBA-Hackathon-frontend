@@ -29,10 +29,6 @@ export default function Login() {
         }
     };
 
-    const handleGoogleLogin = () => {
-        setPassword(''); // Ensure password is empty for Google login
-        window.location.href = 'http://localhost:2000/api/user/auth/google';
-    };
 
     return (
         <>
@@ -69,7 +65,7 @@ export default function Login() {
                     </div>
                     
                     {/* Google Login Button */}
-                    <button type="button" onClick={handleGoogleLogin} className="flex items-center justify-center gap-3 border border-green-500 text-green-700 px-4 py-3 rounded-full w-full mt-4 font-semibold hover:bg-green-500 hover:text-white transition">
+                    <button type="button" className="flex items-center justify-center gap-3 border border-green-500 text-green-700 px-4 py-3 rounded-full w-full mt-4 font-semibold hover:bg-green-500 hover:text-white transition">
                         <FcGoogle size={22} /> Log In with Google
                     </button>
                 </form>

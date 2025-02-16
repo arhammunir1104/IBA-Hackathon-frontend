@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import Navbar2 from '@/components/Navbar2';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 export default function Signup() {
     const [fullName, setFullName] = useState('');
@@ -35,10 +37,25 @@ export default function Signup() {
         }
     };
 
-    const handleGoogleSignup = () => {
-        setPassword(''); // Ensure password is empty
-        // Here, you can trigger Google authentication logic
-        console.log('Google signup clicked');
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            const decoded = jwtDecode(credentialResponse.credential);
+            const { name, email } = decoded; // Extract Google user details
+
+            const response = await fetch('https://iba-hackathon-backend-gamma.vercel.app/register-google', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fullName: name, email })
+            });
+
+            if (!response.ok) {
+                throw new Error('Google signup failed');
+            }
+
+            navigate('/dashboard'); // Redirect after signup
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     return (
@@ -84,13 +101,12 @@ export default function Signup() {
                         <span className="bg-white px-3 text-gray-500 relative">OR</span>
                     </div>
                     
-                    <button 
-                        type="button" 
-                        onClick={handleGoogleSignup} 
-                        className="flex items-center justify-center gap-3 border border-green-500 text-green-700 px-4 py-3 rounded-full w-full mt-4 font-semibold hover:bg-green-500 hover:text-white transition"
-                    >
-                        <FcGoogle size={22} /> Sign Up with Google
-                    </button>
+                    <div className="flex justify-center mt-4">
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={() => setError('Google login failed')}
+                        />
+                    </div>
                 </form>
 
                 <p className="mt-4 text-center text-gray-600">
