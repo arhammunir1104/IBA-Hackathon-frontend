@@ -30,7 +30,7 @@ const AppContextProvider = (props)=>{
         catch(e){
             return(e);
         }
-    };
+    }; 
 
     const loadUserData = async () =>{
         try{

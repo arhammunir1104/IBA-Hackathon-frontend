@@ -14,6 +14,7 @@ import UploadPage from './Pages/UploadPAge.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Provider } from '@radix-ui/react-tooltip';
 import ApiContext from './context/ApiContext.jsx';
+import { ToastContainer } from 'react-toastify';
 
 const router = createBrowserRouter([{
   path: "/",
@@ -58,6 +59,8 @@ createRoot(document.getElementById('root')).render(
 <ApiContext>
   <GoogleOAuthProvider clientId="140659399221-35qoekdg5c8m3guhglc35bvs4mja47gc.apps.googleusercontent.com">
   <RouterProvider router={router} /></GoogleOAuthProvider>
+  
+  <ToastContainer />
 
 </ApiContext>
 );

@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar2 from '@/components/Navbar2';
 import { apiContext } from '@/context/ApiContext';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import {jwtDecode } from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 export default function Login() {
-    const server = useContext(apiContext);
+    const {server, loginUser, token} = useContext(apiContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -15,24 +16,27 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    useEffect(()=>{
+        if(token){
+            navigate('/dashboard'); // Redirect to dashboard if user is already logged in
+        }
+    },[token])
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(server + '/api/user/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password, registerType: "email" })
-            });
-            const result = await response.json();
-            Cookies.set("token", result?.token, { secure: true, sameSite: 'None', expires: 30 });
-
-            if (!response.ok) {
-                throw new Error('Failed to login');
+            const res = await loginUser({email, password, loginType : "email"});
+            if(res?.status === "success"){
+                toast.success("Login successful!");
+                navigate('/dashboard'); // Redirect after signup
             }
-            navigate('/dashboard');
+            else{
+                setLoading(true);
+                toast.error(res?.message);
+            }
         } catch (err) {
             setError(err.message);
         } finally {
@@ -44,26 +48,29 @@ export default function Login() {
         try {
             const decoded = jwtDecode(credentialResponse.credential);
             const { email } = decoded; // Extract Google user details
-            const response = await fetch(server + '/api/user/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, loginType: "google" })
-            });
-            const result = await response.json();
-            Cookies.set("token", result?.token, { secure: true, sameSite: 'None', expires: 30 });
-
-            if (!response.ok) {
-                throw new Error('Google login failed');
+            const res = await loginUser({email, password : "", loginType : "google"});
+            if(res?.status === "success"){
+                toast.success("Login successful!");
+                navigate('/dashboard'); // Redirect after signup
             }
-
-            navigate('/dashboard'); // Redirect after login
+            else{
+                setLoading(true);
+                toast.error(res?.message);
+            }
         } catch (err) {
             setError(err.message);
         }
     };
 
-    return (
+    return  (
         <>
+        {
+            token
+            ?
+            <>
+            </>
+            :
+            <>
             <Navbar2 />
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
                 <div className="bg-white p-8 rounded-lg shadow-lg w-[400px] h-[480px] flex flex-col justify-center">
@@ -103,7 +110,7 @@ export default function Login() {
                             <GoogleLogin
                                 onSuccess={handleGoogleSuccess}
                                 onError={() => {
-                                    console.log('Login Failed');
+                                    // console.log('Login Failed');
                                 }}
                             />
                         </div>
@@ -115,5 +122,9 @@ export default function Login() {
                 </div>
             </div>
         </>
+
+        }
+        </>
+       
     );
 }
