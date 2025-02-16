@@ -16,7 +16,21 @@ const Navbar2 = () => {
           SkillSwap
         </motion.div>
         </Link>
-        
+        <div className="hidden md:flex space-x-8">
+          <Link className="text-gray-700 hover:text-green-600 transition" to="/">
+              Home
+          </Link>
+          <Link className="text-gray-700 hover:text-green-600 transition" to="/edit">
+              Edit Profile
+          </Link>
+          <Link className="text-gray-700 hover:text-green-600 transition" to="/uploadproject">
+              Upload Project
+          </Link>
+          <Link className="text-gray-700 hover:text-green-600 transition" to="/dashboard">
+            Dashboard
+          </Link>
+      
+        </div>
         {/* Login / Sign Up Buttons */}
         <div className="hidden md:flex space-x-4">
           <Link to="/login">
