@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import Navbar2 from '@/components/Navbar2';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
+import { apiContext } from '@/context/ApiContext';
+import { ToastContainer, toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 export default function Signup() {
+
+    const server = useContext(apiContext);
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,17 +24,18 @@ export default function Signup() {
         setError(null);
 
         try {
-            const response = await fetch('http://localhost:2000/api/user/register', {
+            const response = await fetch(server +'/api/user/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ fullName, email, password })
+                body: JSON.stringify({ fullName, email, password, registerType: "email" })
             });
 
             if (!response.ok) {
                 throw new Error('Failed to register');
             }
-
-            navigate('/login');
+            const result = response.json()
+            Cookies.set("token", result?.token, { secure: true, sameSite: 'None',expires: 30 });
+            navigate('/dashboard');
         } catch (err) {
             setError(err.message);
         } finally {
@@ -42,11 +48,13 @@ export default function Signup() {
             const decoded = jwtDecode(credentialResponse.credential);
             const { name, email } = decoded; // Extract Google user details
 
-            const response = await fetch('https://iba-hackathon-backend-gamma.vercel.app/register-google', {
+            const response = await fetch(server +'/api/user/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ fullName: name, email })
+                body: JSON.stringify({ name, email, registerType: "google" })
             });
+            const result = await response.json();
+            Cookies.set("token", result?.token, { secure: true, sameSite: 'None',expires: 30 });
 
             if (!response.ok) {
                 throw new Error('Google signup failed');
@@ -102,10 +110,12 @@ export default function Signup() {
                     </div>
                     
                     <div className="flex justify-center mt-4">
-                        <GoogleLogin
-                            onSuccess={handleGoogleSuccess}
-                            onError={() => setError('Google login failed')}
-                        />
+    <GoogleLogin
+    onSuccess={handleGoogleSuccess }
+    onError={() => {
+        console.log('Login Failed');
+    }}
+    />;
                     </div>
                 </form>
 

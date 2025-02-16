@@ -1,10 +1,11 @@
-const { createContext } = require("react");
+import { createContext } from "react";
 
-const apiContext = createContext();
+export const apiContext = createContext();
 
 export default function ApiContext({children}) {
+    const server = "https://iba-hackathon-backend-gamma.vercel.app"
     return (
-        <apiContext.Provider>
+        <apiContext.Provider value={server}>
             {children}
         </apiContext.Provider>
     )
