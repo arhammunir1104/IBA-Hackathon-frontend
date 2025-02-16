@@ -1,5 +1,7 @@
-import React, { useState, useCallback } from "react";
+import { apiContext } from "@/context/ApiContext";
+import React, { useState, useCallback, useContext } from "react";
 import { useDropzone } from "react-dropzone";
+import { toast } from "react-toastify";
 
 export default function Upload() {
   const [files, setFiles] = useState([]);
@@ -8,7 +10,11 @@ export default function Upload() {
   const [tags, setTags] = useState("");
   const [category, setCategory] = useState("images");
   const [status, setStatus] = useState("public");
-  const [projectPrice, setProjectPrice] = useState("");
+  const [projectPrice, setProjectPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  
+      const {server,  token} = useContext(apiContext);
 
   // Handle file drop
   const onDrop = useCallback((acceptedFiles) => {
@@ -23,6 +29,59 @@ export default function Upload() {
     onDrop,
     accept: "image/*,video/*,.pdf",
   });
+
+  async function upload(e){
+    try{
+      e.preventDefault();
+
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("des", description);
+      formData.append("tags", tags.split(","));
+      formData.append("category", category);
+      formData.append("status", status);
+      formData.append("projectPrice", parseFloat(projectPrice));
+      for (let i = 0; i < files.length; i++) {
+        formData.append("files", files[i]); // Append each file separately
+    }
+
+      const response = await fetch(server + '/api/user/uploadProject', {
+        method: 'POST',
+        headers: { 
+            "Authorization": `Bearer ${token}` 
+         },
+        body: formData
+    });
+    const result = await response.json();
+    console.log(result);
+    if(result?.status === "success"){
+      toast.success("Project uploaded successfully!");
+      setFiles([]);
+      setTitle("");
+      setDescription("");
+      setTags("");
+      setCategory("images");
+      setStatus("public");
+      setProjectPrice(0);
+      setLoading(false);
+    }
+    else{
+      toast.error("Project Uploading Failed");
+      setFiles([]);
+      setTitle("");
+      setDescription("");
+      setTags("");
+      setCategory("images");
+      setStatus("public");
+      setProjectPrice(0);
+      setLoading(false);
+    }
+    }
+    catch(e){
+      toast.error(e.message);
+    }
+  }
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100 p-6 gap-6">
@@ -109,8 +168,15 @@ export default function Upload() {
 
           }
 
-        <button className="bg-green-500 text-white px-6 py-3 rounded-full w-full text-lg font-semibold hover:bg-green-600 transition">
-          Upload
+        <button onClick={upload} disabled={loading} className="bg-green-500 text-white px-6 py-3 rounded-full w-full text-lg font-semibold hover:bg-green-600 transition">
+          {
+            loading
+            ?
+            "Uploading..."
+            :
+            "Upload"
+          }
+          
         </button>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa";
 
 export default function HeroSection() {
-  const categories = ["Images", "Videos", "PDF Files"];
+  const categories = ["images", "videos", "documents", "snippets"]; 
 
   return (
     <section className="relative bg-green-50 min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-24 text-center">
@@ -39,7 +39,7 @@ export default function HeroSection() {
            hover:bg-green-600 hover:text-white focus:opacity-100 transition duration-300"
             >
               {categories.map((category, index) => (
-                <option key={index} value={category}>
+                <option key={index} value={category} className="capitalize">
                   {category}
                 </option>
               ))}
